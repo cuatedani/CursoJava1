@@ -1,12 +1,20 @@
 package platzi.play;
 
 import platzi.play.contenido.Pelicula;
+import platzi.play.contenido.ResumenContenido;
 import platzi.play.excepcion.PeliculaExistenteException;
 import platzi.play.plataforma.Plataforma;
 import platzi.play.plataforma.Usuario;
+import platzi.play.util.FileUtils;
 import platzi.play.util.ScannerUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +24,8 @@ public class Main {
         Usuario sesion = null;
 
         System.out.println("BIENVENIDO A " + plataforma.getNombre());
+
+        cargarPeliculas(plataforma);
 
         //Login
         while (true){
@@ -66,13 +76,16 @@ public class Main {
                     1. Mostrar Peliculas
                     2. Buscar por titulo
                     3. Buscar por genero
-                    4. Mis Favoritos
-                    5. Mis Reseñas
-                    6. Cerrar Sesion
+                    4. Reproducir
+                    5. Mis Favoritos
+                    6. Mis Reseñas
+                    7. Cerrar Sesion
                     """);
 
                 if(opcionMenu == 1){
-                    plataforma.mostrarPeliculas();
+                    List<ResumenContenido> contenidos = plataforma.getResumenes();
+                    contenidos.forEach(c -> System.out.println(c.toString()));
+
                 }
 
                 if(opcionMenu == 2){
@@ -86,17 +99,27 @@ public class Main {
                 }
 
                 if(opcionMenu == 4){
-                    sesion.misFavoritas();
+                    String titulo = scannerUtils.capturarTexto("Pelicula a Reproducir: ");
+                    Pelicula p = plataforma.buscarPelicula(titulo);
+                    if (p != null){
+                        plataforma.reproducir(p);
+                    }else {
+                        System.out.println("No existe la pelicula: " + titulo);
+                    }
                 }
 
                 if(opcionMenu == 5){
-                    sesion.misResenias();
+                    sesion.misFavoritas();
                 }
 
                 if(opcionMenu == 6){
+                    sesion.misResenias();
+                }
+
+                if(opcionMenu == 7){
                     sesion = null;
                     break;
-                }else if (opcionMenu > 6 || opcionMenu < 1){
+                }else if (opcionMenu > 7 || opcionMenu < 1){
                     System.out.println("Opcion Invalida!!");
                 }
             }
@@ -149,5 +172,10 @@ public class Main {
         }else {
             System.out.println("Sesion Invalida");
         }
+    }
+
+    private static void cargarPeliculas(Plataforma plataforma){
+        List<Pelicula> peliculas = FileUtils.leerContenido();
+        peliculas.forEach(p -> plataforma.agregarPelicula(p));
     }
 }
