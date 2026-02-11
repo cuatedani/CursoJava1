@@ -11,15 +11,26 @@ public class Usuario {
     private int id;
     private String nombre;
     private int edad;
+    private String permisos;
     private List<Pelicula> favoritas;
     private List<Calificacion> resenias;
 
     //CONSTRUCTOR
 
-    public Usuario(String nombre, int edad) {
+    public Usuario(String nombre, int edad, boolean admin) {
         this.id = IdGenerator.nextUsuarioId();
         this.nombre = nombre;
         this.edad = edad;
+        this.permisos = "admin";
+        this.favoritas = new ArrayList<>();
+        this.resenias = new ArrayList<>();
+    }
+
+    public Usuario(String nombre, int edad ){
+        this.id = IdGenerator.nextUsuarioId();
+        this.nombre = nombre;
+        this.edad = edad;
+        this.permisos = "user";
         this.favoritas = new ArrayList<>();
         this.resenias = new ArrayList<>();
     }
@@ -65,11 +76,39 @@ public class Usuario {
         this.nombre = nombre;
     }
 
+    public String getPermisos() {
+        return permisos;
+    }
+
+    public void setPermisos(String permisos) {
+        this.permisos = permisos;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void misFavoritas(){
+        if(favoritas.isEmpty()){
+            System.out.println("Sin Peliculas Favoritas");
+        }else {
+            favoritas.forEach(pelicula -> {
+                System.out.println(pelicula.getId() + " - " + pelicula.getTitulo());
+            });
+        }
+    }
+
+    public void misResenias(){
+        if(resenias.isEmpty()){
+            System.out.println("Sin Reseñas de Peliculas");
+        }else {
+            resenias.forEach(r -> {
+                System.out.println(r.getId() + "- " + r.getPelicula().getTitulo() + " - " + r.getPuntuacion() + " - " + r.getResenia());
+            });
+        }
     }
 }

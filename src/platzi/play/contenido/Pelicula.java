@@ -15,11 +15,11 @@ public class Pelicula {
     private int duracion;
     private LocalDate anio;
     private List<Calificacion> resenias;
-    private boolean disponibilida;
+    private boolean disponibilidad;
 
     //CONSTRUCTOR
 
-    public Pelicula(String titulo, String descripcion, String genero, int duracion, LocalDate anio, boolean disponibilida) {
+    public Pelicula(String titulo, String descripcion, String genero, int duracion, LocalDate anio) {
         this.id = IdGenerator.nextPeliculaId();
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -27,7 +27,7 @@ public class Pelicula {
         this.duracion = duracion;
         this.anio = anio;
         this.resenias = new ArrayList<>();
-        this.disponibilida = disponibilida;
+        this.disponibilidad = true;
     }
 
     //GETTERS Y SETTERS
@@ -87,12 +87,12 @@ public class Pelicula {
                 .orElse(0);
     }
 
-    public boolean isDisponibilida() {
-        return disponibilida;
+    public boolean isDisponibilidad() {
+        return disponibilidad;
     }
 
-    public void setDisponibilida(boolean disponibilida) {
-        this.disponibilida = disponibilida;
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 
     //METODOS
@@ -131,7 +131,7 @@ public class Pelicula {
     public Calificacion calificar(int idUsuario, String resenia, double puntuacion) {
         Calificacion calif = new Calificacion(
                                     idUsuario,
-                                    this.id,
+                                    this,
                                     resenia,
                                     puntuacion
                             );
