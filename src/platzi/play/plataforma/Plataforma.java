@@ -1,9 +1,6 @@
 package platzi.play.plataforma;
 
-import platzi.play.contenido.Contenido;
-import platzi.play.contenido.Documental;
-import platzi.play.contenido.Pelicula;
-import platzi.play.contenido.ResumenContenido;
+import platzi.play.contenido.*;
 import platzi.play.excepcion.PeliculaExistenteException;
 import platzi.play.util.FileUtils;
 
@@ -111,6 +108,13 @@ public class Plataforma {
     public List<Documental> getPeDocumentales(){
         return contenidos.stream().filter(contenido -> contenido instanceof Documental)
                 .map(c -> (Documental) c)
+                .toList();
+    }
+
+    public List<Promocionable> getContenidoPromocionable(){
+        return contenidos.stream()
+                .filter(c -> c instanceof Promocionable)
+                .map(c-> (Promocionable) c)
                 .toList();
     }
 

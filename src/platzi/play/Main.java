@@ -1,6 +1,7 @@
 package platzi.play;
 
 import platzi.play.contenido.Contenido;
+import platzi.play.contenido.Pelicula;
 import platzi.play.contenido.ResumenContenido;
 import platzi.play.excepcion.PeliculaExistenteException;
 import platzi.play.plataforma.Plataforma;
@@ -18,6 +19,8 @@ public class Main {
         Usuario sesion = null;
 
         System.out.println("BIENVENIDO A " + plataforma.getNombre());
+
+        plataforma.getContenidoPromocionable().forEach(p -> p.promocionar());
 
         cargarPeliculas(plataforma);
 
@@ -136,7 +139,7 @@ public class Main {
                     LocalDate anio = scannerUtils.capturarFecha("Año Estreno:");
 
                     try {
-                        plataforma.agregarPelicula(new Contenido(titulo, descripcion, genero, duracion, anio));
+                        plataforma.agregarPelicula(new Pelicula(titulo, descripcion, genero, duracion, anio));
                     }catch (PeliculaExistenteException e){
                         System.out.println(e.getMessage());
                     }
