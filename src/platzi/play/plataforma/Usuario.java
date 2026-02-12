@@ -1,7 +1,7 @@
 package platzi.play.plataforma;
 
 import platzi.play.contenido.Calificacion;
-import platzi.play.contenido.Pelicula;
+import platzi.play.contenido.Contenido;
 import platzi.play.util.IdGenerator;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class Usuario {
     private String nombre;
     private int edad;
     private String permisos;
-    private List<Pelicula> favoritas;
+    private List<Contenido> favoritas;
     private List<Calificacion> resenias;
 
     //CONSTRUCTOR
@@ -37,8 +37,8 @@ public class Usuario {
 
     //METODOS
 
-    public void makeResenia(Pelicula pelicula, double puntuacion, String resenia){
-        Calificacion calif = pelicula.calificar(this.id, resenia, puntuacion);
+    public void makeResenia(Contenido contenido, double puntuacion, String resenia){
+        Calificacion calif = contenido.calificar(this.id, resenia, puntuacion);
         resenias.add(calif);
     }
 
@@ -52,11 +52,11 @@ public class Usuario {
         this.resenias = resenias;
     }
 
-    public List<Pelicula> getFavoritas() {
+    public List<Contenido> getFavoritas() {
         return favoritas;
     }
 
-    public void setFavoritas(List<Pelicula> favoritas) {
+    public void setFavoritas(List<Contenido> favoritas) {
         this.favoritas = favoritas;
     }
 

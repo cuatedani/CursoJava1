@@ -1,7 +1,6 @@
 package platzi.play.util;
 
-import platzi.play.contenido.Pelicula;
-import platzi.play.plataforma.Plataforma;
+import platzi.play.contenido.Contenido;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,7 +16,7 @@ public class FileUtils {
     public static final String ARCHIVO_USUARIOS = "usuarios.txt";
     public static final String SEPARADOR = "|";
 
-    public static List<Pelicula> leerContenido() {
+    public static List<Contenido> leerContenido() {
         List peliculas = new ArrayList<>();
         try {
             List<String> lineas = Files.readAllLines(Paths.get(ARCHIVO_PELICULAS));
@@ -33,8 +32,8 @@ public class FileUtils {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/aaaa");
                     LocalDate anio = LocalDate.parse(datos[4], formatter);
 
-                    Pelicula pelicula = new Pelicula(titulo, descripcion, genero, duracion, anio);
-                    peliculas.add(pelicula);
+                    Contenido contenido = new Contenido(titulo, descripcion, genero, duracion, anio);
+                    peliculas.add(contenido);
                 }
             });
         } catch (IOException e) {
@@ -43,13 +42,13 @@ public class FileUtils {
         return peliculas;
     }
 
-    public static void escribirContenido(Pelicula pelicula){
+    public static void escribirContenido(Contenido contenido){
         String linea = String.join(SEPARADOR,
-                pelicula.getTitulo(),
-                pelicula.getDescripcion(),
-                pelicula.getGenero(),
-                String.valueOf(pelicula.getDuracion()),
-                String.valueOf(pelicula.getAnio())
+                contenido.getTitulo(),
+                contenido.getDescripcion(),
+                contenido.getGenero(),
+                String.valueOf(contenido.getDuracion()),
+                String.valueOf(contenido.getAnio())
         );
 
         try {

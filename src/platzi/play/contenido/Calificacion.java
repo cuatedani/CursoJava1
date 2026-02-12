@@ -5,14 +5,14 @@ import platzi.play.util.IdGenerator;
 public class Calificacion {
     private int id;
     private int idUsuario;
-    private Pelicula pelicula;
+    private Contenido contenido;
     private String resenia;
     private double puntuacion;
 
-    public Calificacion(int idUsuario, Pelicula pelicula, String resenia, double puntuacion) {
+    public Calificacion(int idUsuario, Contenido contenido, String resenia, double puntuacion) {
         this.id = IdGenerator.nextReseniaId();
         this.idUsuario = idUsuario;
-        this.pelicula = pelicula;
+        this.contenido = contenido;
         this.resenia = resenia;
         this.puntuacion = puntuacion;
     }
@@ -33,12 +33,12 @@ public class Calificacion {
         this.idUsuario = idUsuario;
     }
 
-    public Pelicula getPelicula() {
-        return pelicula;
+    public Contenido getPelicula() {
+        return contenido;
     }
 
-    public void setPelicula(Pelicula pelicula) {
-        this.pelicula = pelicula;
+    public void setPelicula(Contenido contenido) {
+        this.contenido = contenido;
     }
 
     public String getResenia() {

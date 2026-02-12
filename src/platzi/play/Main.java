@@ -1,6 +1,6 @@
 package platzi.play;
 
-import platzi.play.contenido.Pelicula;
+import platzi.play.contenido.Contenido;
 import platzi.play.contenido.ResumenContenido;
 import platzi.play.excepcion.PeliculaExistenteException;
 import platzi.play.plataforma.Plataforma;
@@ -8,14 +8,8 @@ import platzi.play.plataforma.Usuario;
 import platzi.play.util.FileUtils;
 import platzi.play.util.ScannerUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
@@ -99,12 +93,12 @@ public class Main {
                 }
 
                 if(opcionMenu == 4){
-                    String titulo = scannerUtils.capturarTexto("Pelicula a Reproducir: ");
-                    Pelicula p = plataforma.buscarPelicula(titulo);
+                    String titulo = scannerUtils.capturarTexto("Contenido a Reproducir: ");
+                    Contenido p = plataforma.buscarPelicula(titulo);
                     if (p != null){
                         plataforma.reproducir(p);
                     }else {
-                        System.out.println("No existe la pelicula: " + titulo);
+                        System.out.println("No existe la contenido: " + titulo);
                     }
                 }
 
@@ -128,8 +122,8 @@ public class Main {
             while (true){
                 int opcionMenu = scannerUtils.capturarInt("""
                     MENU:
-                    1. Agregar Pelicula
-                    2. ELiminar Pelicula
+                    1. Agregar Contenido
+                    2. ELiminar Contenido
                     3. Cerrar Sesion
                     """);
 
@@ -142,23 +136,23 @@ public class Main {
                     LocalDate anio = scannerUtils.capturarFecha("Año Estreno:");
 
                     try {
-                        plataforma.agregarPelicula(new Pelicula(titulo, descripcion, genero, duracion, anio));
+                        plataforma.agregarPelicula(new Contenido(titulo, descripcion, genero, duracion, anio));
                     }catch (PeliculaExistenteException e){
                         System.out.println(e.getMessage());
                     }
 
-                    System.out.println("Pelicula Agregada!");
+                    System.out.println("Contenido Agregada!");
                 }
 
                 if (opcionMenu==2){
                     System.out.println("ELIMINAR PELICULA:");
                     plataforma.mostrarPeliculas();
-                    int idPelicula = scannerUtils.capturarInt("Pelicula a Eliminar: ");
+                    int idPelicula = scannerUtils.capturarInt("Contenido a Eliminar: ");
                     if(plataforma.existeIdPelicula(idPelicula)){
                         plataforma.eliminarPelicula(idPelicula);
-                        System.out.println("Pelicula Eliminada!");
+                        System.out.println("Contenido Eliminada!");
                     } else {
-                        System.out.println("No existe esa pelicula");
+                        System.out.println("No existe esa contenido");
                     }
                 }
 
@@ -175,7 +169,7 @@ public class Main {
     }
 
     private static void cargarPeliculas(Plataforma plataforma){
-        List<Pelicula> peliculas = FileUtils.leerContenido();
-        peliculas.forEach(p -> plataforma.agregarPelicula(p));
+        List<Contenido> contenidos = FileUtils.leerContenido();
+        contenidos.forEach(p -> plataforma.agregarPelicula(p));
     }
 }
