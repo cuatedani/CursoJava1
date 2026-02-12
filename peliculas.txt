@@ -1,10 +1,12 @@
-1 | El Origen | Un ladrón que roba secretos a través de los sueños recibe una misión imposible. | Ciencia Ficcion | 148 | 16/07/2010 | true
-2 | Interestelar | Un grupo de astronautas viaja a través de un agujero de gusano en busca de un nuevo hogar para la humanidad. | Ciencia Ficcion | 169 | 07/11/2014 | true
-3 | El Padrino | La historia de la familia mafiosa Corleone y su lucha por el poder. | Drama | 175 | 24/03/1972 | true
-4 | El Caballero de la Noche | Batman enfrenta al Joker, un criminal que busca sembrar el caos en Gotham. | Accion | 152 | 18/07/2008 | true
-5 | Titanic | Una joven aristócrata se enamora de un artista a bordo del famoso transatlántico. | Romance | 195 | 19/12/1997 | true
-6 | Gladiador | Un general romano traicionado busca venganza en la arena del Coliseo. | Accion | 155 | 05/05/2000 | true
-7 | Coco | Un niño viaja al mundo de los muertos para descubrir la historia de su familia. | Animacion | 105 | 27/10/2017 | true
-8 | Parasitos | Una familia humilde se infiltra en la vida de una familia adinerada. | Thriller | 132 | 30/05/2019 | true
-9 | Matrix | Un hacker descubre la verdad sobre la realidad y su papel en la guerra contra las maquinas. | Ciencia Ficcion | 136 | 31/03/1999 | true
-10 | Forrest Gump | La vida extraordinaria de un hombre con un corazon noble que presencia eventos historicos. | Drama | 142 | 06/07/1994 | true
+El Origen | Un ladrón que roba secretos a través de los sueños recibe una misión imposible. | Ciencia Ficcion | 148 | 16/07/2010
+Interestelar | Un grupo de astronautas viaja a través de un agujero de gusano en busca de un nuevo hogar para la humanidad. | Ciencia Ficcion | 169 | 07/11/2014
+El Padrino | La historia de la familia mafiosa Corleone y su lucha por el poder. | Drama | 175 | 24/03/1972
+El Caballero de la Noche | Batman enfrenta al Joker, un criminal que busca sembrar el caos en Gotham. | Accion | 152 | 18/07/2008
+Titanic | Una joven aristócrata se enamora de un artista a bordo del famoso transatlántico. | Romance | 195 | 19/12/1997
+Gladiador | Un general romano traicionado busca venganza en la arena del Coliseo. | Accion | 155 | 05/05/2000
+Coco | Un niño viaja al mundo de los muertos para descubrir la historia de su familia. | Animacion | 105 | 27/10/2017
+Parasitos | Una familia humilde se infiltra en la vida de una familia adinerada. | Thriller | 132 | 30/05/2019
+Matrix | Un hacker descubre la verdad sobre la realidad y su papel en la guerra contra las maquinas. | Ciencia Ficcion | 136 | 31/03/1999
+Forrest Gump | La vida extraordinaria de un hombre con un corazon noble que presencia eventos historicos. | Drama | 142 | 06/07/1994
+
+

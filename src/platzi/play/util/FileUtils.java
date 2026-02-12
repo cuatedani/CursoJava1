@@ -6,6 +6,7 @@ import platzi.play.plataforma.Plataforma;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -24,17 +25,15 @@ public class FileUtils {
             {
                 String[] datos = l.split("\\" + SEPARADOR);
                 if (datos.length == 7) {
-                    int id = Integer.parseInt(datos[0]);
-                    String titulo = datos[1];
-                    String descripcion = datos[2];
-                    String gener = datos[3];
-                    int duracion = Integer.parseInt(datos[4]);
+                    String titulo = datos[0];
+                    String descripcion = datos[1];
+                    String genero = datos[2];
+                    int duracion = Integer.parseInt(datos[3]);
 
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/aaaa");
-                    LocalDate anio = LocalDate.parse(datos[5], formatter);
-                    boolean disponible = Boolean.parseBoolean(datos[6]);
+                    LocalDate anio = LocalDate.parse(datos[4], formatter);
 
-                    Pelicula pelicula = new Pelicula(titulo, descripcion, gener, duracion, anio);
+                    Pelicula pelicula = new Pelicula(titulo, descripcion, genero, duracion, anio);
                     peliculas.add(pelicula);
                 }
             });
@@ -42,5 +41,25 @@ public class FileUtils {
             System.out.println("Ha ocurrido un error al leer el archivo: " + e.getMessage());
         }
         return peliculas;
+    }
+
+    public static void escribirContenido(Pelicula pelicula){
+        String linea = String.join(SEPARADOR,
+                pelicula.getTitulo(),
+                pelicula.getDescripcion(),
+                pelicula.getGenero(),
+                String.valueOf(pelicula.getDuracion()),
+                String.valueOf(pelicula.getAnio())
+        );
+
+        try {
+            Files.writeString(Paths.get(ARCHIVO_PELICULAS),
+                    linea + System.lineSeparator(),
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
+                    );
+        } catch (IOException e) {
+            System.out.println("Error al escribir el archivo: " + e.getMessage());
+        }
     }
 }

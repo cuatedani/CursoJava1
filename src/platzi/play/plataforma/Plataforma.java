@@ -3,6 +3,7 @@ package platzi.play.plataforma;
 import platzi.play.contenido.Pelicula;
 import platzi.play.contenido.ResumenContenido;
 import platzi.play.excepcion.PeliculaExistenteException;
+import platzi.play.util.FileUtils;
 
 import java.util.*;
 
@@ -36,6 +37,7 @@ public class Plataforma {
             throw new PeliculaExistenteException(pelicula.getTitulo());
         }
         this.peliculas.add(pelicula);
+        FileUtils.escribirContenido(pelicula);
     }
 
     public void agregarUsuario(Usuario usuario){
