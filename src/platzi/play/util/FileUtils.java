@@ -1,6 +1,8 @@
 package platzi.play.util;
 
 import platzi.play.contenido.Contenido;
+import platzi.play.contenido.Documental;
+import platzi.play.contenido.Pelicula;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,29 +19,46 @@ public class FileUtils {
     public static final String SEPARADOR = "|";
 
     public static List<Contenido> leerContenido() {
-        List peliculas = new ArrayList<>();
+        List<Contenido> contenidoList = new ArrayList<>();
+
         try {
             List<String> lineas = Files.readAllLines(Paths.get(ARCHIVO_PELICULAS));
             lineas.forEach(l ->
             {
                 String[] datos = l.split("\\" + SEPARADOR);
-                if (datos.length == 7) {
-                    String titulo = datos[0];
-                    String descripcion = datos[1];
-                    String genero = datos[2];
-                    int duracion = Integer.parseInt(datos[3]);
+                String tipo = datos[0];
+                Contenido contenido;
+
+                if ("PELICULA".equals(tipo) && datos.length == 6) {
+                    String titulo = datos[1];
+                    String descripcion = datos[2];
+                    String genero = datos[3];
+                    int duracion = Integer.parseInt(datos[4]);
 
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/aaaa");
-                    LocalDate anio = LocalDate.parse(datos[4], formatter);
+                    LocalDate anio = LocalDate.parse(datos[5], formatter);
 
-                    Contenido contenido = new Contenido(titulo, descripcion, genero, duracion, anio);
-                    peliculas.add(contenido);
+                    contenido = new Pelicula(titulo, descripcion, genero, duracion, anio);
+                    contenidoList.add(contenido);
+                }else if ("DOCUMENTAL".equals(tipo) && datos.length == 7){
+                    String titulo = datos[1];
+                    String descripcion = datos[2];
+                    String genero = datos[3];
+                    int duracion = Integer.parseInt(datos[4]);
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/aaaa");
+                    LocalDate anio = LocalDate.parse(datos[5], formatter);
+
+                    String narrador = datos[6];
+
+                    contenido = new Documental(titulo, descripcion, genero, duracion, anio, narrador);
+                    contenidoList.add(contenido);
                 }
             });
         } catch (IOException e) {
             System.out.println("Ha ocurrido un error al leer el archivo: " + e.getMessage());
         }
-        return peliculas;
+        return contenidoList;
     }
 
     public static void escribirContenido(Contenido contenido){
@@ -50,6 +69,14 @@ public class FileUtils {
                 String.valueOf(contenido.getDuracion()),
                 String.valueOf(contenido.getAnio())
         );
+
+        String lineaFinal;
+        if(contenido instanceof Documental){
+             Documental doc = (Documental) contenido;
+             lineaFinal = "DOCUMENTAL" + SEPARADOR + linea + SEPARADOR + doc.getNarrador();
+        }else {
+            lineaFinal = "PELICULA" + SEPARADOR + linea;
+        }
 
         try {
             Files.writeString(Paths.get(ARCHIVO_PELICULAS),

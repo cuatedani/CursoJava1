@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Contenido {
+public abstract class Contenido {
     private int id;
     private String titulo;
     private String descripcion;
@@ -96,9 +96,7 @@ public class Contenido {
 
     //METODOS
 
-    public void reproducir(){
-        System.out.println("Reproduciendo: " + titulo);
-    }
+    public abstract void reproducir();
 
     public String fichaTecnica(){
         return "Titulo: " + titulo + "\n" +
